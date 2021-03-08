@@ -1,0 +1,160 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Financial Api",
+        "description": "Description of the financial api",
+        "contact": {
+            "email": "geovane.cavalcante@outlook.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/transaction": {
+            "post": {
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Performs transaction between portfolios",
+                "operationId": "App\\Http\\Controllers\\Finances\\OperationController::register",
+                "requestBody": {
+                    "description": "Input data format",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "value": {
+                                        "type": "number"
+                                    },
+                                    "payer": {
+                                        "type": "string"
+                                    },
+                                    "payee": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/transaction/{id}/reversal": {
+            "post": {
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Reverse a transaction",
+                "operationId": "App\\Http\\Controllers\\Finances\\OperationController::reversal",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Transaction id to roll back",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/wallets/{id}": {
+            "get": {
+                "tags": [
+                    "wallets"
+                ],
+                "summary": "Fetch a user's wallet",
+                "operationId": "App\\Http\\Controllers\\Finances\\WalletController::register",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Desired user id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/users": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "User registration in the application",
+                "operationId": "App\\Http\\Controllers\\Users\\UserController::register",
+                "requestBody": {
+                    "description": "Input data format",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "full_name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "cpf": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "profile_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/users-profiles": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Search user profiles",
+                "operationId": "App\\Http\\Controllers\\Users\\UserProfileController::show",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
